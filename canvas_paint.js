@@ -16,8 +16,12 @@ function clear() {
 window.onresize = () => setSize();
 
 canvas.addEventListener("click", function (evt) {
+    clear();
     var mousePos = getMousePos(canvas, evt);
-    alert(mousePos.x + ',' + mousePos.y);
+    context.font = "30px Courier New";
+    context.fillStyle = "red";
+    context.textAlign = "center";
+    context.fillText(`${mousePos.x} , ${mousePos.y}`, canvas.width / 2, canvas.height / 2);
 }, false);
 
 function getMousePos(canvas, evt) {
