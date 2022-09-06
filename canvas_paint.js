@@ -15,7 +15,7 @@ function clear() {
 
 window.onresize = () => setSize();
 
-canvas.addEventListener("click", function (evt) {
+canvas.addEventListener("mousemove", function (evt) {
     clear();
     var mousePos = getMousePos(canvas, evt);
     context.font = "30px Courier New";
