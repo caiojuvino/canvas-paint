@@ -18,10 +18,22 @@ window.onresize = () => setSize();
 canvas.addEventListener("mousemove", function (evt) {
     clear();
     var mousePos = getMousePos(canvas, evt);
+    let x = mousePos.x;
+    let y = mousePos.y;
     context.font = "30px Courier New";
     context.fillStyle = "red";
     context.textAlign = "center";
-    context.fillText(`${mousePos.x} , ${mousePos.y}`, canvas.width / 2, canvas.height / 2);
+    context.fillText(`${x} , ${y}`, canvas.width / 2, canvas.height / 2);
+
+    context.beginPath();
+    context.moveTo(x, 0);
+    context.lineTo(x, canvas.height);
+    context.stroke();
+
+    context.beginPath();
+    context.moveTo(0, y);
+    context.lineTo(canvas.width, y);
+    context.stroke()
 }, false);
 
 function getMousePos(canvas, evt) {
