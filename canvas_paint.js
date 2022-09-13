@@ -1,6 +1,15 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
+const colors = [
+    "#000000",
+    "#FF0000", "#00FF00", "#0000FF",
+    "#00FFFF", "#FF00FF", "#FFFF00",
+    "#80FF00", "#8000FF", "#FF8000", "#0080FF", "#00FF80", "#FF0080"
+]
+
+let colorIndex = -1;
+
 function setSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -24,7 +33,7 @@ canvas.addEventListener("mousemove", function (evt) {
     let x = mousePos.x;
     let y = mousePos.y;
     context.font = "30px Courier New";
-    context.fillStyle = "red";
+    context.fillStyle = colors[colorIndex];
     context.textAlign = "center";
     context.fillText(`${x} , ${y}`, canvas.width / 2, canvas.height / 2);
 
@@ -32,9 +41,8 @@ canvas.addEventListener("mousemove", function (evt) {
     //drawHLine(y);
 
     if(drawing){
-        context.beginPath();
-        context.rect(rectStartPos.x, rectStartPos.y, x-rectStartPos.x, y-rectStartPos.y);
-        context.stroke();
+        context.strokeStyle = colors[colorIndex];
+        context.strokeRect(rectStartPos.x, rectStartPos.y, x-rectStartPos.x, y-rectStartPos.y);
     }
 
 }, false);
@@ -54,6 +62,7 @@ function drawHLine(y){
 }
 
 canvas.addEventListener("mousedown", function (evt) {
+    colorIndex = colorIndex < 10 ? colorIndex + 1 : 0;
     drawing = true;
     rectStartPos = getMousePos(canvas, evt);
     console.log(rectStartPos);
